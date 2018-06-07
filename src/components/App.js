@@ -3,6 +3,7 @@ import './App.css';
 import ZipForm from './ZipForm';
 import WeatherList from './WeatherList'
 import get from 'axios' ;
+import CurrentDay from './CurrentDay';
 
 class App extends Component {
 
@@ -20,10 +21,11 @@ class App extends Component {
     this.apikey = "&units=metric&appid=c59493e7a8643f49446baf0d5ed9d646";
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onDayClick = this.onDayClick.bind(this);
   }
-  onDayClic()
+  onDayClick(index)
   {
-    
+    this.setState ( {selectedDate : index})
   }
   onFormSubmit(zipcode) {
 
@@ -38,13 +40,15 @@ class App extends Component {
     //this.setState( {zipcode} ); //or {zipcode: zipcode}
     }
 
-  render() {
+  render()
+ {
     return (
-      <div className="App">
-     <ZipForm onSubmit={this.onFormSubmit} />
-     <WeatherList days={this.state.dates}/>
-   
-     </div>
+    <div className="App">
+      <ZipForm onSubmit={this.onFormSubmit} />
+      <WeatherList days={this.state.dates} onDayClick= {this.onDayClick} />
+      {(this.state.selectedDate !=null)? 
+    <CurrentDay city = {this.state.city} day={this.state.dates[this.state.selectedDate]}/>:""}
+  </div>
     );
   }
 }

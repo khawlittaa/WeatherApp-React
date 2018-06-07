@@ -8,9 +8,15 @@ class WeatherListItem extends Component
         this.state = {
             selectedDate: ""
         };
-        this.onDayClickd = this.onDayClick.bind(this);
+        this.onDayClick = this.onDayClick.bind(this);
         
     }
+
+    onDayClick() 
+    { 
+        this.props.onDayClick(this.props.index);
+    }
+
     render () 
     {
         const { day } = this.props;
@@ -23,11 +29,7 @@ class WeatherListItem extends Component
         </div>
         );
     }
-    onDayClick(e) 
-    {
-        e.preventDefault(); 
-        this.setState( {selectedDate :""} ); 
-    }
+   
 
 }
 
